@@ -16,7 +16,7 @@ p {
 }
 
 .sidenav-trigger {
-  color: #26a69a;
+  color: #edf8f7;
 }
 
 .parallax-container {
@@ -54,4 +54,25 @@ p {
 
 footer.page-footer {
   margin: 0;
+
 }
+
+ul li a {
+  color: #edf8f7;
+}
+
+.material-icons {
+  color: black;
+}
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+    

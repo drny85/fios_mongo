@@ -6,3 +6,12 @@ exports.getReferrals = (req, res, next) => {
 }
 
 
+exports.addReferral = (req, res, next) => {
+    let title = 'Adding referral'
+    res.render('referrals/add-referral', { title: title })
+  }
+  
+
+
+
+
