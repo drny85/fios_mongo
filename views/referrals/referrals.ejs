@@ -1,9 +1,40 @@
 <%- include('../partials/header.ejs') %>
 <%- include('../partials/navbar.ejs') %>
 
+<div class="container">
+    <div>
+        <h2 class="center z-depth-3  lighten-3">All Referrals </h2>
+        <a class="btn waves-effect black waves-light" href="/add-referral">Add Referral</a>
+       
+    </div>
+    <br>
+    <div>
+        <table class="table z-depth-3 highlight">
+            <thead class="grey lighten-1">
+                <tr>
+                    <th>Name</th>
+                    <th>Last Name</th>
 
-<h2 class="center teal lighten-3">Referrals page</h2>
-<a class="btn waves-effect black waves-light" href="/add-referral">Add Referral</a>
-<br>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (referrals) { %>
+                <% referrals.forEach(referral => { %>
+                <tr>
+                    <td class="">
+                        <%= referral.name %>
+                    </td>
+                    <td>
+                        <%= referral.last_name %>
+                    </td>
+                </tr>
+                <% }) %>
+                <% } else { %>
+                <h3 class="center">No referrals</h3>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <%- include('../partials/footer.ejs') %>

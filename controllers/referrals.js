@@ -3,7 +3,12 @@ const Referral = require('../models/referral');
 
 exports.getReferrals = (req, res, next) => {
   let title = 'Referrals'
-  res.render('referrals/referrals', { title: title })
+  Referral.find()
+  .then(referrals => {
+    res.render('referrals/referrals', { title: title, referrals: referrals});
+  })
+  .catch(err => console.log(err));
+  
 }
 
 
@@ -24,12 +29,14 @@ exports.postReferral = (req, res, next) => {
   referral.save()
   .then(result => {
     console.log("Saved");
-    res.redirect('/');
+    res.redirect('/referrals');
   })
   .catch(err => console.log(err))
   
  
 }
+
+exports.get
   
 
 
