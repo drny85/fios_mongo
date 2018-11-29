@@ -23,9 +23,6 @@
     $('#comment').val('');
     M.textareaAutoResize($('#comment'));
 
-    
-
-    
 
   });
 
