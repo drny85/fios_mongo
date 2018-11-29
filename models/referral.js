@@ -16,7 +16,9 @@ const referralSchema = new Schema({
     email: String,
     referralBy: String,
     comment: String,
-    status: String
+    status: String,
+    moveIn: Date,
+    date_entered: {type: Date, default: Date.now()}
     
 })
 

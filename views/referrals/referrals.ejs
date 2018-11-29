@@ -5,16 +5,19 @@
     <div>
         <h4 class="center z-depth-2  lighten-3">All Referrals </h4>
         <a class="btn waves-effect black waves-light" href="/add-referral">Add Referral</a>
-       
+
     </div>
     <br>
-    <div>
-        <table class="table z-depth-3 highlight">
+    <div class="animated fadeInLeft">
+        <table id="referrals_table" class="table z-depth-3 highlight">
             <thead class="grey lighten-1">
                 <tr>
-                    <th>Name</th>
-                    <th>Last Name</th>
-
+                    <th>Full Name</th>
+                    <th>Address</th>
+                    <th>Apt</th>
+                    <th>Phone</th>
+                    <th>Move In</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,9 +26,28 @@
                 <tr>
                     <td class="">
                         <%= referral.name %>
+                        <%= referral.last_name %>
                     </td>
                     <td>
-                        <%= referral.last_name %>
+                        <%= referral.address.address %>
+                    </td>
+                    <td>
+                        <%= referral.address.apt %>
+                    </td>
+                    <td>
+                        <%= referral.phone %>
+                    </td>
+                    <td>
+                        <%= referral.moveIn %>
+                    </td>
+                    <td class="center 
+                    <%= referral.status === 'new' ? 'blue lighten-1': '' %>
+                    <%= referral.status === 'pending' ? 'amber lighten-3': '' %>
+                    <%= referral.status === 'closed' ? 'green': '' %>
+                    <%= referral.status === 'not sold' ? 'red': '' %>
+                    <%= referral.status === 'in progress' ? 'grey': '' %>
+                    ">
+                        <%= referral.status %>
                     </td>
                 </tr>
                 <% }) %>

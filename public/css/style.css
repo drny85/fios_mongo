@@ -76,11 +76,35 @@ main {
   flex: 1 0 auto;
 }
 
-tr td {
+tr td, #name, #last_name, #city {
   text-transform: capitalize;
 }
 
 #myForm {
   margin-bottom: 80px;
 }
-    
+   
+#referrals_table {
+  margin-bottom: 80px;
+}
+
+#apt {
+  text-transform: uppercase;
+}
+
+.active {
+  background-color: #222e3be1 !important;
+  margin-top: 4px;
+  
+}
+
+ #nav ul li:hover {
+  
+  /* font-size: 2rem; */
+  margin-top: 6px;
+  box-shadow: #2d2f31e1;
+  transition-duration: 1.8s;
+ 
+  
+}
+

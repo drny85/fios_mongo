@@ -20,10 +20,6 @@
     })
 
 
-    $('#comment').val('');
-    M.textareaAutoResize($('#comment'));
-
-
   });
 
   function formatPhone(obj) {
