@@ -4,22 +4,73 @@
 <div class="container">
     <h2 class="center">Add New Referral</h2>
     <div class="card">
-        <div class="row">
-            <form action="/add-referral" method="POST">
+        <form action="/add-referral" method="POST">
+            <div class="row">
                 <div class="input-field col s6">
-                    <input type="text" id="name" name="name" class="validate">
+                    <input type="text" id="name" required name="name" class="validate">
                     <label for="name">Name</label>
                 </div>
                 <div class="input-field col s6">
-                    <input type="text" id="last_name" name="last_name" class="validate">
+                    <input type="text" id="last_name" required name="last_name" class="validate">
                     <label for="last_name">Last Name</label>
                 </div>
-                <button class="btn black" type="submit">Submit</button>
-            </form>
-        </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input type="text" id="address" name="address" required class="validate">
+                    <label for="address">Address</label>
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" id="apt" name="apt" class="validate">
+                    <label for="apt">Apt</label>
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" id="city" name="city" required class="validate">
+                    <label for="city">City</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input type="number" id="zipcode" name="zipcode" maxlength="5" minlength="5" pattern="[0-9]"
+                        required class="validate">
+                    <label for="zipcode">Zip code</label>
+                </div>
+                <div class="input-field col s4">
+                    <input type="tel" id="phone"  onblur="formatPhone(this);" maxlength="10" required name="phone" class="validate">
+                    <label for="phone">Phone</label>
+                </div>
+                <div class="input-field col s4">
+                    <input type="email" pattern=".+@globex.com" id="email" email name="email" class="validate">
+                    <label for="city">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" name="referralBy" id="referralBy">
+                    <label for="referralBy">Referral By</label>
+                </div>
+                <div class="input-field col s6">
+                    <select>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Materialize Select</label>
+                </div>
+                <div class="row">
+                        <div class="input-field col s12">
+                          <textarea id="comment" name="comment" class="materialize-textarea"></textarea>
+                          <label for="comment">Notes or Comments</label>
+                        </div>
+                      </div>
+            </div>
 
+            <button class="btn black" type="submit">Submit</button>
+        </form>
     </div>
 
+</div>
 </div>
 
 <%- include('../partials/footer.ejs') %>
