@@ -14,9 +14,7 @@
             $('#city').val('Yonkers');
          }  else if (value == '100') {
             $('#city').val('Manhattan');
-         } else {
-            $('#city').val('');
-         }
+         } 
       }
 
     })

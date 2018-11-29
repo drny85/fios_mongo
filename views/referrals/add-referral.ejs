@@ -3,8 +3,8 @@
 
 <div class="container">
     <h2 class="center">Add New Referral</h2>
-    <div class="card">
-        <form action="/add-referral" method="POST">
+    <div class="card grey lighten-5">
+        <form id="myForm" action="/add-referral" method="POST">
             <div class="row">
                 <div class="input-field col s6">
                     <input type="text" id="name" required name="name" class="validate">
@@ -40,7 +40,7 @@
                     <label for="phone">Phone</label>
                 </div>
                 <div class="input-field col s4">
-                    <input type="email" pattern=".+@globex.com" id="email" email name="email" class="validate">
+                    <input type="email" id="email" email name="email" class="validate">
                     <label for="city">Email</label>
                 </div>
             </div>
@@ -65,8 +65,11 @@
                         </div>
                       </div>
             </div>
+            <div>
+                    <button class="btn black waves-effect waves-light" type="submit">Submit</button>
+            </div>
+            <br>
 
-            <button class="btn black" type="submit">Submit</button>
         </form>
     </div>
 

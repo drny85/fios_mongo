@@ -79,4 +79,8 @@ main {
 tr td {
   text-transform: capitalize;
 }
+
+#myForm {
+  margin-bottom: 80px;
+}
     

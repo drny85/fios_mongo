@@ -21,10 +21,28 @@ exports.addReferral = (req, res, next) => {
 exports.postReferral = (req, res, next) => {
   const name = req.body.name;
   const last_name = req.body.last_name;
+  const address = {
+    address: req.body.address,
+    apt: req.body.apt,
+    city: req.body.city,
+    zipcode: req.body.zipcode
+  };
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const referralBy = req.body.referralBy;
+  const comment = req.body.comment;
+  const status = req.body.status;
 
   const referral = new Referral({
     name: name,
-    last_name: last_name
+    last_name: last_name,
+    address: address,
+    email: email,
+    phone: phone,
+    comment: comment, 
+    referralBy: referralBy,
+    status: status
+
   });
   referral.save()
   .then(result => {
