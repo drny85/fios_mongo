@@ -3,6 +3,13 @@
       //populate the selct options
     $('select').formSelect();
 
+    $('.modal').modal();
+
+    $('#delete_referral_btn').on('click', () => {
+       console.log('Clicked');
+       $('#form_modal').submit();
+    })
+
     //populate zipcode
     $('#zipcode').keyup(function(){
       let value = this.value;
@@ -18,6 +25,31 @@
       }
 
     })
+
+    $('#status').on('change', function (e) {
+      let optionSelected = $("option:selected", this);
+      let valueSelected = this.value;
+     
+      if (valueSelected.toLowerCase() == 'closed') {
+         //code if order is closed
+          $('#order_closed').removeClass('hidden');
+          $('#mon').attr('required', true);
+          $('#due_date').attr('required', true);
+          $('#order_date').attr('required', true);
+          $('#package').attr('required', true);
+
+      } else {
+         //code if order is not closed
+         $('#order_closed').addClass('hidden');
+         $('#mon').attr('required', false);
+         $('#due_date').attr('required', false);
+         $('#order_date').attr('required', false);
+         $('#package').attr('required', false);
+      }
+     
+     
+  });
+
 
 
   });

@@ -57,6 +57,11 @@ exports.updateReferral = (req, res, next) => {
   const comment = req.body.comment;
   const status = req.body.status;
   const moveIn = req.body.moveIn;
+  const mon = req.body.mon;
+  const due_date = req.body.due_date;
+  const order_date = req.body.order_date;
+  const package = req.body.package;
+
 
   Referral.findByIdAndUpdate(id, {
     name: name,
@@ -67,12 +72,26 @@ exports.updateReferral = (req, res, next) => {
     comment: comment, 
     referralBy: referralBy,
     status: status,
+    due_date: due_date,
+    order_date: order_date,
+    package: package,
+    mon: mon,
     moveIn: moveIn
   }).then(referral => {
     res.redirect('/detail/'+referral._id);
   })
   .catch(err => console.log(err));
 
+}
+
+//delete referral
+exports.deleteReferral = (req, res, next) => {
+  const id = req.params.id;
+  Referral.findByIdAndDelete(id)
+  .then(() => {
+    res.redirect('/referrals');
+  })
+  .catch(err => console.log(err));
 }
 
 //adding the referral handler page

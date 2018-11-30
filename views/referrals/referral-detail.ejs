@@ -15,7 +15,19 @@
                 <div class="col s12 l5 center">
                     <div class="mt-8">
                         <a class="btn grey" href="/referral/edit/<%= referral._id %>"><i class="material-icons left">edit</i> EDIT</a>
-                        <a class="btn red" href="/referral/delete/<%= referral._id %>"><i class="material-icons left">delete</i> DELETE</a>
+                        <a class="waves-effect waves-light btn modal-trigger red" href="#modal1"><i class="material-icons left">delete</i> DELETE</a>
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                              <h4>Referral Deletion</h4>
+                              <p>Are you sure you want to delete it?</p>
+                            </div>
+                            <div class="modal-footer">
+                                    <button class="btn modal-close grey">Close</button>
+                                    <button id="delete_referral_btn" class="modal-close black btn">Yes, Delete</button>
+                                    <form id="form_modal" method="POST" class="hidden" action="/referral/delete/<%= referral._id %>">
+                                    </form>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -24,7 +36,7 @@
         <div class="col s12 l7 z-depth-4">
             <ul class="collection with-header">
                 <% if (referral.mon) { %>
-                <li class="collection-item"><b class="mr-3">MON:</b>
+                <li class="collection-item upper"><b class="mr-3 ">MON:</b>
                     <%= referral.mon %>
                 </li>
                 <li class="collection-item">Order Date:

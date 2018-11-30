@@ -13,6 +13,10 @@ const referralSchema = new Schema({
     comment: String,
     status: String,
     moveIn: String,
+    due_date: String,
+    order_date: String,
+    package: String,
+    mon: String,
     date_entered: {type: Date, default: Date.now}
     
 });

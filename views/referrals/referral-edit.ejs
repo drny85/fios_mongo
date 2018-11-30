@@ -64,14 +64,48 @@
                         <select name="status" id="status">
                             
                             <option value="<%= referral.status %>" selected><%= referral.status %> <i>(current value)</i></option>
-                            <option value="new">New</option>
-                            <option value="closed">Closed</option>
-                            <option value="in progress">In Progress</option>
-                            <option value="pending">Pending</option>
-                            <option value="not sold">Not Sold</option>
+                            <option value="New">New</option>
+                            <option value="Closed">Closed</option>
+                            <option value="In progress">In Progress</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Not sold">Not Sold</option>
                         </select>
                         <label class="active" for="status">Status</label>
                     </div>
+                    <!-- if order is closed show this otherwise hide -->
+                    <div class="<%= referral.status === 'Closed' ? '' : 'hidden' %> animated fadeInDown" id="order_closed"> 
+                        <div class="row" >
+                            <div class="input-field col s6 l6">
+                                <input type="text" class="upper <%= referral.status === 'Closed' ? 'validate' : '' %>" name="mon" maxlength="13" id="mon" value="<%= referral.mon %>">
+                                <label for="mon" class="active">MON</label>
+                            </div>
+                            <div class="input-field col s6 l6">
+                                <input type="date" name="order_date" id="order_date" value="<%= referral.order_date %>">
+                                <label for="order_date" class="active">Order Date</label>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="input-field col s6 l6">
+                                <input type="date" name="due_date" id="due_date" value="<%= referral.due_date %>">
+                                <label for="due_date" class="active">Due Date</label>
+                            </div>
+                            <div class="input-field col s6 l6">
+                                <select name="package" id="package">
+                                    <option value="<%= referral.package %>" selected><%= referral.package %> <i>(current value)</i></option>
+                                    <option value="TP Ultimate">TP Ultimate</option>
+                                    <option value="TP Extreme">TP Extreme</option>
+                                    <option value="TP Preferred">TP Preferred</option>
+                                    <option value="TP Custom">TP Custom</option>
+                                    <option value="Giganit Only">Gigabit Only</option>
+                                    <option value="DP Custom">DP Custom</option>
+                                    <option value="Internet 300/300">Internet 300/300</option>
+                                    <option value="Internet 100/100">Internet 100/100</option>
+                                </select>
+                                <label class="active" for="status">Package</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- div division -->
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea id="comment" name="comment" class="materialize-textarea"><%= referral.comment %></textarea>

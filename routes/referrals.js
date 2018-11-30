@@ -20,5 +20,8 @@ router.get('/referral/edit/:id', referralController.editReferral);
 
 router.post('/referral/update/:id', referralController.updateReferral);
 
+//delete referral route
+router.post('/referral/delete/:id', referralController.deleteReferral);
+
 module.exports = router;
 

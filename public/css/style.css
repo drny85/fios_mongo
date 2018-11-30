@@ -168,3 +168,6 @@ li .active {
   color: inherit;
 }
 
+.hidden {
+  display: none;
+}
