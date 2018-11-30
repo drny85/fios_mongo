@@ -8,11 +8,12 @@ const Schema = mongoose.Schema;
 const referralBySchema = new Schema({
     name: {type: String, required: true},
     last_name: String,
+    phone: String,
     email: String,
     referrals: [Referral]
 })
 
-const referralBy = mongoose.model('Referee', referralBySchema);
+const referre = mongoose.model('Referee', referralBySchema);
 
-module.exports = referralBy;
+module.exports = referre;
 

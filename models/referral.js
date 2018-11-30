@@ -1,6 +1,6 @@
 //jshint esversion:6
 const mongoose = require('mongoose');
-const ReferralBy = require('./referralby');
+const Referee= require('./referee');
 
 const Schema = mongoose.Schema;
 

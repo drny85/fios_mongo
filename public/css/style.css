@@ -83,6 +83,10 @@ tr td, #name, #last_name, #city {
 #myForm {
   margin-bottom: 80px;
 }
+
+.lowercase {
+  text-transform: lowercase;
+}
    
 #referrals_table {
   margin-bottom: 80px;

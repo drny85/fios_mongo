@@ -1,14 +1,16 @@
 //jshint esversion:6
 const Referral = require('../models/referral');
-const ReferralBy = require('../models/referralby');
+const Referee = require('../models/referee');
 
 exports.getReferrals = (req, res, next) => {
   let title = 'Referrals';
   let path = 'referrals';
   Referral.find()
+  .populate('referralBy')
   .sort('moveIn')
   .exec()
   .then(referrals => {
+    console.log(referrals);
     res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
   })
   .catch(err => console.log(err));
@@ -20,7 +22,7 @@ exports.getReferral = (req, res, next) => {
   Referral.findById(id).then(referral => {
    let title = "Details";
    let path = 'details';
-    res.render('referrals/referral-detail', {referral:referral, title: title, path: path});
+    res.render('referrals/referral-detail', { referral: referral, title: title, path: path});
   });
 };
 
@@ -28,7 +30,13 @@ exports.getReferral = (req, res, next) => {
 exports.getAddReferral = (req, res, next) => {
     let title = 'Adding referral';
     let path = 'add-referral';
-    res.render('referrals/add-referral', { title: title, path: path });
+    let refereesArray = [];
+    Referee.find()
+    .then(referees => {
+      refereesArray = [...referees];
+      res.render('referrals/add-referral', { title: title, path: path, referees:  refereesArray});
+    })
+   
   };
 
 // editing a referral 
@@ -36,7 +44,7 @@ exports.editReferral = (req, res, next) => {
     const id = req.params.id;
     Referral.findOne({_id: id})
     .then(referral => {
-      res.render('referrals/referral-edit', {referral: referral, title: "Editing", path: 'editing'});
+      res.render('referrals/referral-edit', { referral: referral, title: "Editing", path: 'editing'});
     })
     .catch(err => console.log(err));
 };
@@ -54,7 +62,7 @@ exports.updateReferral = (req, res, next) => {
   };
   const email = req.body.email;
   const phone = req.body.phone;
-  const referralBy = req.body.referralBy;
+  const Referee = req.body.Referee;
   const comment = req.body.comment;
   const status = req.body.status;
   const moveIn = req.body.moveIn;
@@ -71,7 +79,7 @@ exports.updateReferral = (req, res, next) => {
     email: email,
     phone: phone,
     comment: comment, 
-    referralBy: referralBy,
+    Referee: Referee,
     status: status,
     due_date: due_date,
     order_date: order_date,
@@ -85,12 +93,12 @@ exports.updateReferral = (req, res, next) => {
 
 }
 
-//get referralby page
+//get Referee page
 exports.getAddReferee = (req, res, next) => {
   let title = 'Add Referre';
   let path = 'add-referee';
 
-  res.render('referrals/add-referee', {title: title, path: path});
+  res.render('referrals/add-referee', {title: title, path: path , message: req.flash('error')});
 }
 
  
@@ -149,29 +157,33 @@ exports.getReferees = (req, res, next) => {
   const title = 'All referees';
   const path = 'referees';
   
-  ReferralBy.find()
+  
+  Referee.find()
   .then(referees => {
+
     res.render('referrals/all-referees', {referees: referees, title: title, path: path});
   })
   .catch(err => console.log(err));
 }
 
-//post referralBy or referee
-exports.postReferralBy = (req, res, next) => {
+//post Referee or referee
+exports.postReferee = (req, res, next) => {
   const name = req.body.name;
   const last_name = req.body.last_name;
   const phone = req.body.phone;
   const email = req.body.email;
-  console.log(phone);
 
-  ReferralBy.findOne({name: name, last_name: last_name})
+  
+  
+  Referee.findOne({name: name, last_name: last_name})
   .then(result => {
     if (result) {
-      res.redirect('/referralby');
+      req.flash('error', 'Referee aldeay in Database');
+      res.redirect('/add-referee');
       throw new Error('Referee already in file');
       
     } else {
-      const referee = new ReferralBy({
+      const referee = new Referee({
         name: name,
         last_name: last_name,
         phone: phone,

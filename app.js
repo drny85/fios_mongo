@@ -6,6 +6,7 @@ const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 
 const MONGO_URL = 'mongodb://localhost:27017/fios';
 //main app
@@ -25,6 +26,9 @@ const store = new MongoDBStore({
       store: store
     })
   );
+
+  //flash messages
+app.use(flash());
   
 // set views engine 
 app.set('view engine', 'ejs');

@@ -3,6 +3,11 @@
 
 <div class="container">
     <h2 class="center">Add Referee</h2>
+    <% if (message.length > 0) { %>
+        <div>
+            <p class="center"><%= message %></p>
+        </div>
+    <% } %>
     <div class="card grey lighten-5 animated fadeInDown">
         <form id="myForm" action="/add-referee" method="POST">
             <div class="row">
