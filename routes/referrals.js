@@ -10,7 +10,7 @@ const referralController = require('../controllers/referrals');
 router.get('/referrals', referralController.getReferrals);
 
 //adding a new referral 
-router.get('/add-referral', referralController.addReferral);
+router.get('/add-referral', referralController.getAddReferral);
 //adding referral route
 router.post('/add-referral', referralController.postReferral);
 // referral detail route
@@ -25,7 +25,7 @@ router.post('/referral/update/:id', referralController.updateReferral);
 router.post('/referral/delete/:id', referralController.deleteReferral);
 
 //get referralby page route
-router.get('/referralby', referralController.getReferralBy);
+router.get('/add-referee', referralController.getAddReferee);
 
 //add referralBy or referee 
 router.post('/add-referee', referralController.postReferralBy);
