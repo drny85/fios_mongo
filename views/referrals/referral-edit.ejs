@@ -5,9 +5,9 @@
 
 <div class="container">
     <br>
-    <a class="btn waves-effect black waves-light mt-8" href="/referral/update">Add Referral</a>
+    <a class="btn waves-effect black waves-light mt-8" href="/add-referral">Add Referral</a>
     <div class="card">
-        <h2 class="center">Update Referral</h2>
+        <h4 class="center">Update Referral</h4>
         <div class="card grey lighten-5 animated fadeInDown">
             <form id="myFormUpdate" action="/referral/update/<%= referral._id %>" method="POST">
                 <div class="row">
@@ -21,15 +21,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="text" id="address" name="address" value="<%= referral.address.address %>" required class="validate capitalized">
                         <label class="active" for="address">Address</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="text" id="apt" name="apt" value="<%= referral.address.apt %>" class="validate">
                         <label class="active" for="apt">Apt</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="number" id="zipcode" name="zipcode" value="<%= referral.address.zipcode %>" maxlength="5" minlength="5" pattern="[0-9]"
                             required class="validate">
                         <label class="active" for="zipcode">Zip code</label>
@@ -37,30 +37,30 @@
 
                 </div>
                 <div class="row">
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="text" id="city" name="city" value="<%= referral.address.city %>" required class="validate">
                         <label class="active" for="city">City</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="tel" id="phone" value="<%= referral.phone %>" onblur="formatPhone(this);" maxlength="10" required name="phone"
                             class="validate">
                         <label class="active" for="phone">Phone</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="email" id="email" value="<%= referral.email %>" email name="email" class="validate">
                         <label class="active" for="city">Email</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="date" name="moveIn" value="<%= referral.moveIn %>" id="moveIn" required>
                         <label class="active" for="moveIn">Move In</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <input type="text" name="referralBy" class="capitalized" value="<%= referral.referralBy %>" id="referralBy">
                         <label class="active" for="referralBy">Referral By</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 l4">
                         <select name="status" id="status">
                             
                             <option value="<%= referral.status %>" selected><%= referral.status %> <i>(current value)</i></option>

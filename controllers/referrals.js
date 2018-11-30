@@ -69,7 +69,6 @@ exports.updateReferral = (req, res, next) => {
     status: status,
     moveIn: moveIn
   }).then(referral => {
-    console.log(referral);
     res.redirect('/detail/'+referral._id);
   })
   .catch(err => console.log(err));
