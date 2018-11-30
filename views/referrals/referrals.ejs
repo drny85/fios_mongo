@@ -18,6 +18,7 @@
                     <th>Phone</th>
                     <th>Move In</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +50,7 @@
                     ">
                         <%= referral.status %>
                     </td>
+                    <td class="center"><a class="btn black" href="/detail/<%= referral._id %>">Details</a></td>
                 </tr>
                 <% }) %>
                 <% } else { %>

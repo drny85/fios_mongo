@@ -12,6 +12,15 @@ exports.getReferrals = (req, res, next) => {
   
 }
 
+exports.getReferral = (req, res, next) => {
+  const id = req.params.id;
+  Referral.findById(id).then(referral => {
+   let title = "Details";
+   let path = 'details';
+    res.render('referrals/referral-detail', {referral:referral, title: title, path: path});
+  })
+}
+
 
 exports.addReferral = (req, res, next) => {
     let title = 'Adding referral'

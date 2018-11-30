@@ -14,7 +14,7 @@ router.get('/add-referral', referralController.addReferral);
 
 router.post('/add-referral', referralController.postReferral);
 
-
+router.get('/detail/:id', referralController.getReferral);
 
 module.exports = router;
 
