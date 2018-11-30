@@ -1,5 +1,6 @@
 //jshint esversion:6
 const Referral = require('../models/referral');
+const ReferralBy = require('../models/referralby');
 
 exports.getReferrals = (req, res, next) => {
   let title = 'Referrals';
@@ -84,6 +85,52 @@ exports.updateReferral = (req, res, next) => {
 
 }
 
+//get referralby page
+exports.getReferralBy = (req, res, next) => {
+  let title = 'Referral By';
+  let path = 'referralby';
+
+  res.render('referrals/referral-by', {title: title, path: path});
+}
+
+//post referralBy or referee
+exports.postReferralBy = (req, res, next) => {
+  const title = 'Add Referee';
+  const path = 'adding referee';
+  const name = req.body.name;
+  const last_name = req.body.last_name;
+  const phone = req.body.phone;
+  const email = req.body.email;
+
+  ReferralBy.findOne({name: name, last_name: last_name})
+  .then(result => {
+    if (result) {
+      res.redirect('/referralby');
+      throw new Error('Referee already in file');
+      
+    } else {
+      const referee = new ReferralBy({
+        name: name,
+        last_name: last_name,
+        phone: phone,
+        email: email,
+        referrals: []
+      })
+      referee.save()
+      .then((ref) => {
+        res.redirect('/all-referees');
+      })
+    }
+  }).catch(err => console.log(err));
+  
+
+}
+     
+  
+
+
+  
+
 //delete referral
 exports.deleteReferral = (req, res, next) => {
   const id = req.params.id;
@@ -132,6 +179,18 @@ exports.postReferral = (req, res, next) => {
   
  
 };
+
+
+exports.getReferees = (req, res, next) => {
+  const title = 'All referees';
+  const path = 'all referess';
+  
+  ReferralBy.find()
+  .then(referees => {
+    res.render('referrals/all-referees', {referees: referees, title: title, path: path});
+  })
+  .catch(err => console.log(err));
+}
 
   
 

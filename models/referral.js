@@ -1,5 +1,6 @@
 //jshint esversion:6
 const mongoose = require('mongoose');
+const ReferralBy = require('./referralby');
 
 const Schema = mongoose.Schema;
 
@@ -9,7 +10,6 @@ const referralSchema = new Schema({
     address: Object,
     phone: {type: String, required: true},
     email: String,
-    referralBy: String,
     comment: String,
     status: String,
     moveIn: String,
@@ -17,7 +17,8 @@ const referralSchema = new Schema({
     order_date: String,
     package: String,
     mon: String,
-    date_entered: {type: Date, default: Date.now}
+    date_entered: {type: Date, default: Date.now},
+    referralBy: { type: Schema.Types.ObjectId, ref: 'Referee'}
     
 });
 

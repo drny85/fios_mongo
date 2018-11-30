@@ -7,7 +7,7 @@ const path = require('path');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-const MONGO_URL = 'mongodb://localhost:27017/referral';
+const MONGO_URL = 'mongodb://localhost:27017/fios';
 //main app
 const app = express();
 app.use(helmet());
