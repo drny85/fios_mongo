@@ -92,9 +92,19 @@ tr td, #name, #last_name, #city {
   text-transform: uppercase;
 }
 
-.active {
+li .active {
   background-color: #222e3be1 !important;
   margin-top: 6px;
+  
+  
+}
+.actived_page {
+  background-color: #222e3be1 !important;
+  margin-top: 3px;
+  
+}
+.actived_page a {
+  font-size: 1.1rem !important;
   
 }
 

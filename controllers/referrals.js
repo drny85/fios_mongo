@@ -5,12 +5,14 @@ exports.getReferrals = (req, res, next) => {
   let title = 'Referrals';
   let path = 'referrals';
   Referral.find()
+  .sort('moveIn')
+  .exec()
   .then(referrals => {
     res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
   })
   .catch(err => console.log(err));
   
-}
+};
 
 exports.getReferral = (req, res, next) => {
   const id = req.params.id;
@@ -18,15 +20,15 @@ exports.getReferral = (req, res, next) => {
    let title = "Details";
    let path = 'details';
     res.render('referrals/referral-detail', {referral:referral, title: title, path: path});
-  })
-}
+  });
+};
 
 
 exports.addReferral = (req, res, next) => {
     let title = 'Adding referral'
     let path = 'add-referral'
-    res.render('referrals/add-referral', { title: title, path: path })
-  }
+    res.render('referrals/add-referral', { title: title, path: path });
+  };
 
 
 exports.postReferral = (req, res, next) => {
@@ -43,7 +45,7 @@ exports.postReferral = (req, res, next) => {
   const referralBy = req.body.referralBy;
   const comment = req.body.comment;
   const status = req.body.status;
-  const moveIn = req.body.moveIn
+  const moveIn = req.body.moveIn;
 
   const referral = new Referral({
     name: name,
@@ -62,10 +64,10 @@ exports.postReferral = (req, res, next) => {
     console.log("Saved");
     res.redirect('/referrals');
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
   
  
-}
+};
 
   
 
