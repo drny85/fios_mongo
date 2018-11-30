@@ -1,0 +1,103 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<% if (referral) { %>
+
+<div class="container">
+    <br>
+    <a class="btn waves-effect black waves-light mt-8" href="/referral/update">Add Referral</a>
+    <div class="card">
+        <h2 class="center">Update Referral</h2>
+        <div class="card grey lighten-5 animated fadeInDown">
+            <form id="myFormUpdate" action="/referral/update/<%= referral._id %>" method="POST">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="name" required name="name" value="<%= referral.name %>" class="validate">
+                        <label class="active" for="name">Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="text" id="last_name" required name="last_name" value="<%= referral.last_name %>" class="validate">
+                        <label class="active" for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input type="text" id="address" name="address" value="<%= referral.address.address %>" required class="validate capitalized">
+                        <label class="active" for="address">Address</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="text" id="apt" name="apt" value="<%= referral.address.apt %>" class="validate">
+                        <label class="active" for="apt">Apt</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="number" id="zipcode" name="zipcode" value="<%= referral.address.zipcode %>" maxlength="5" minlength="5" pattern="[0-9]"
+                            required class="validate">
+                        <label class="active" for="zipcode">Zip code</label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input type="text" id="city" name="city" value="<%= referral.address.city %>" required class="validate">
+                        <label class="active" for="city">City</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="tel" id="phone" value="<%= referral.phone %>" onblur="formatPhone(this);" maxlength="10" required name="phone"
+                            class="validate">
+                        <label class="active" for="phone">Phone</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="email" id="email" value="<%= referral.email %>" email name="email" class="validate">
+                        <label class="active" for="city">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input type="date" name="moveIn" value="<%= referral.moveIn %>" id="moveIn" required>
+                        <label class="active" for="moveIn">Move In</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="text" name="referralBy" class="capitalized" value="<%= referral.referralBy %>" id="referralBy">
+                        <label class="active" for="referralBy">Referral By</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select name="status" id="status">
+                            
+                            <option value="<%= referral.status %>" selected><%= referral.status %> <i>(current value)</i></option>
+                            <option value="new">New</option>
+                            <option value="closed">Closed</option>
+                            <option value="in progress">In Progress</option>
+                            <option value="pending">Pending</option>
+                            <option value="not sold">Not Sold</option>
+                        </select>
+                        <label class="active" for="status">Status</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="comment" name="comment" class="materialize-textarea"><%= referral.comment %></textarea>
+                            <label class="active" for="comment">Notes or Comments</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button id="btn-submit" class="btn ml-8 black waves-effect waves-light" type="submit">Update</button>
+                </div>
+                <br>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<br>
+<% } else { %>
+    <div>
+        <h4 class="center">No Data</h4>
+    </div>
+ <% } %>
+
+</div>
+
+
+<%- include('../partials/footer.ejs') %>

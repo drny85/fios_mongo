@@ -4,11 +4,11 @@
 <div class="container">
     <% if (referral) { %>
     <h3 class="center z-depth-3">Referral Details</h3>
-    <div class="card">
+    <div class="card animated fadeInDown">
         <div class="card-title">
             <div class="row">
                 <div class="col s7">
-                    <h3 class="center capitalized">
+                    <h3 class="capitalized ml-8">
                         <%= referral.name %> <%= referral.last_name %>
                     </h3>
                 </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
     <div class="row">
-        <div class="col s7">
+        <div class="col s7 z-depth-4">
             <ul class="collection with-header">
                 <% if (referral.mon) { %>
                 <li class="collection-item"><b class="mr-3">MON:</b>
@@ -49,28 +49,32 @@
                 <li class="collection-item">Zip code:
                     <%= referral.address.zipcode %>
                 </li>
-                <li class="collection-item">Phone:
+                <li class="collection-item"><i class="material-icons tiny">
+                        phone
+                        </i> Phone:
                     <%= referral.phone %>
                 </li>
-                <li class="collection-item">Email:
-                    <%= referral.email %>
+                <li class="collection-item"><i class="material-icons tiny">
+                        email
+                        </i> Email:
+                   <span id="mailto"><a href="mailto:<%= referral.email %>"> <%= referral.email %> </a></span> 
                 </li>
                 <li class="collection-item">Move In:
                     <%= referral.moveIn %>
                 </li>
-                <li class="collection-item">Referred By:
+                <li class="collection-item capitalized">Referred By:
                     <%= referral.referralBy %>
                 </li>
                 <li class="collection-item">Status:
-                    <%= referral.status %>
+                    <span class="upper"><%= referral.status %></span>
                 </li>
             </ul>
 
         </div>
         <div class="col s5">
             <ul class="collection with-header z-depth-3">
-                <li class="collection-header grey">Note or Comments</li>
-                <li class="collection-item italiced">
+                <li class="collection-header grey ligthen-3"><h6 class="center bolded">Note or Comments</h6></li>
+                <li class="collection-item italiced capitalized">
                     <%= referral.comment %>
                 </li>
             </ul>

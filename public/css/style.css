@@ -142,13 +142,29 @@ li .active {
 .mr-4 {
   margin-right: 4px;
 }
+
 .mr-5 {
   margin-right: 5px;
 }
+
+.ml-8 {
+  margin-left: 8px;
+}
+
 .mt-8 {
   margin-top: 8px;
 }
+.mt-5 {
+  margin-top: 5px;
+}
 .upper {
   text-transform: uppercase;
+}
+.bolded {
+  font-weight: bolder;
+}
+
+#mailto a{
+  color: inherit;
 }
 
