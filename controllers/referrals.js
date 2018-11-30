@@ -96,14 +96,31 @@ exports.updateReferral = (req, res, next) => {
     mon: mon,
     moveIn: moveIn
   }).then(referral => {
-    console.log(process.env.SENDGRID_API_KEY);
+   
     res.redirect('/detail/'+referral._id);
     if ( status.toLowerCase() === 'closed') {
       return transporter.sendMail({
         to: 'drny85@me.com',
         from: 'drny85@gmail.com',
         subject: 'Testing',
-        html: '<h3> Hello Amigo. Now Added</h3>'
+        html: ` <!DOCTYPE html>
+        <html>
+          <head>
+            <!--Import Google Icon Font-->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      
+            <!--Let browser know website is optimized for mobile-->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          </head>
+      
+          <body>
+          
+           <div class="z-depth-5"> Hello </div>
+          </body>
+        </html>
+              `
       })
     }
   })
