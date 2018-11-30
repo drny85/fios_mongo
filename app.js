@@ -7,6 +7,7 @@ const path = require('path');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
+require('dotenv').config()
 
 const MONGO_URL = 'mongodb://localhost:27017/fios';
 //main app
@@ -48,7 +49,6 @@ const referralRoutes = require('./routes/referrals');
 app.use(homeRoutes);
 app.use(reportRoutes);
 app.use(referralRoutes);
-
 
 mongoose
   .connect(MONGO_URL, {useNewUrlParser: true})

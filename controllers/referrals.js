@@ -1,6 +1,15 @@
 //jshint esversion:6
 const Referral = require('../models/referral');
 const Referee = require('../models/referee');
+const nodemailer = require('nodemailer');
+const transport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(transport({
+  auth : {
+    api_key : process.env.SENDGRID_API_KEY
+    
+  }
+}));
 
 exports.getReferrals = (req, res, next) => {
   let title = 'Referrals';
@@ -87,7 +96,16 @@ exports.updateReferral = (req, res, next) => {
     mon: mon,
     moveIn: moveIn
   }).then(referral => {
+    console.log(process.env.SENDGRID_API_KEY);
     res.redirect('/detail/'+referral._id);
+    if ( status.toLowerCase() === 'closed') {
+      return transporter.sendMail({
+        to: 'drny85@me.com',
+        from: 'drny85@gmail.com',
+        subject: 'Testing',
+        html: '<h3> Hello Amigo. Now Added</h3>'
+      })
+    }
   })
   .catch(err => console.log(err));
 
