@@ -25,8 +25,8 @@ exports.getReferral = (req, res, next) => {
 
 
 exports.addReferral = (req, res, next) => {
-    let title = 'Adding referral'
-    let path = 'add-referral'
+    let title = 'Adding referral';
+    let path = 'add-referral';
     res.render('referrals/add-referral', { title: title, path: path });
   };
 

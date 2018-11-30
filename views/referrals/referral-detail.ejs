@@ -2,44 +2,88 @@
 <%- include('../partials/navbar.ejs') %>
 
 <div class="container">
-   <% if (referral) { %>
+    <% if (referral) { %>
     <h3 class="center z-depth-3">Referral Details</h3>
+    <div class="card">
+        <div class="card-title">
+            <div class="row">
+                <div class="col s7">
+                    <h3 class="center capitalized">
+                        <%= referral.name %> <%= referral.last_name %>
+                    </h3>
+                </div>
+                <div class="col s5 center">
+                    <div class="mt-8">
+                        <a class="btn grey" href="/referral/edit/<%= referral._id %>">EDIT</a>
+                        <a class="btn red" href="/referral/delete/<%= referral._id %>">DELETE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col s7">
             <ul class="collection with-header">
-                <li class="collection-header"><h4><%= referral.name %> <%= referral.last_name %></h4></li>
                 <% if (referral.mon) { %>
-                <li class="collection-item">MON: <%= referral.mon %></li>
-                <li class="collection-item">Order Date: <%= referral.order_date %></li>
-                <li class="collection-item">Due Date: <%= referral.due_date %></li>
-                <li class="collection-item">Package: <%= referral.package %></li>
+                <li class="collection-item"><b class="mr-3">MON:</b>
+                    <%= referral.mon %>
+                </li>
+                <li class="collection-item">Order Date:
+                    <%= referral.order_date %>
+                </li>
+                <li class="collection-item">Due Date:
+                    <%= referral.due_date %>
+                </li>
+                <li class="collection-item">Package:
+                    <%= referral.package %>
+                </li>
                 <% } %>
-                <li class="collection-item">Address: <%= referral.address.address %></li>
-                <li class="collection-item">Apt: <%= referral.address.apt %></li>
-                <li class="collection-item">City: <%= referral.address.city %></li>
-                <li class="collection-item">Zip code: <%= referral.address.zipcode %></li>
-                <li class="collection-item">Phone: <%= referral.phone %></li>
-                <li class="collection-item">Email: <%= referral.email %></li>
-                <li class="collection-item">Move In: <%= referral.moveIn %></li>
-                <li class="collection-item">Referred By: <%= referral.referralBy %></li>
-                <li class="collection-item">Status: <%= referral.status %></li>
-              </ul>
+                <li class="collection-item capitalized"><b class="mr-3">Address: </b>
+                    <%= referral.address.address %>
+                </li>
+                <li class="collection-item upper"><b>Apt:</b>
+                    <%= referral.address.apt %>
+                </li>
+                <li class="collection-item">City:
+                    <%= referral.address.city %>
+                </li>
+                <li class="collection-item">Zip code:
+                    <%= referral.address.zipcode %>
+                </li>
+                <li class="collection-item">Phone:
+                    <%= referral.phone %>
+                </li>
+                <li class="collection-item">Email:
+                    <%= referral.email %>
+                </li>
+                <li class="collection-item">Move In:
+                    <%= referral.moveIn %>
+                </li>
+                <li class="collection-item">Referred By:
+                    <%= referral.referralBy %>
+                </li>
+                <li class="collection-item">Status:
+                    <%= referral.status %>
+                </li>
+            </ul>
 
         </div>
         <div class="col s5">
-            <ul class="collection with-header">
+            <ul class="collection with-header z-depth-3">
                 <li class="collection-header grey">Note or Comments</li>
-                <li class="collection-item"><%= referral.commnet %></li>
+                <li class="collection-item italiced">
+                    <%= referral.comment %>
+                </li>
             </ul>
 
         </div>
     </div>
-<% } else { %>
-<div class="z-depth-3">
-    <h3 class="center">No Data</h3>
-</div>
+    </div>
+    <% } else { %>
+    <div class="z-depth-3">
+        <h3 class="center">No Data</h3>
+    </div>
 
-<% } %>
+    <% } %>
 </div>
 
 

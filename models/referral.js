@@ -15,6 +15,6 @@ const referralSchema = new Schema({
     moveIn: String,
     date_entered: {type: Date, default: Date.now}
     
-})
+});
 
 module.exports = mongoose.model('Referral', referralSchema);

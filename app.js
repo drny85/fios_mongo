@@ -4,11 +4,13 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const express = require('express');
 const path = require('path');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
 const MONGO_URL = 'mongodb://localhost:27017/referral';
 //main app
 const app = express();
+app.use(helmet());
 //storing sessions
 const store = new MongoDBStore({
     uri: MONGO_URL,
