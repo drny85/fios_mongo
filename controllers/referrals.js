@@ -188,7 +188,9 @@ exports.postReferral = (req, res, next) => {
   .then(result => {
     return Referee.findById(referralBy)
   }).then(ref => {
-    console.log(ref);
+    
+    ref.referrals.push(referral);
+    ref.save();
     res.redirect('/referrals')
   })
   .catch(err => console.log(err));
