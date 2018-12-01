@@ -57,7 +57,7 @@
                         <label class="active" for="moveIn">Move In</label>
                     </div>
                     <div class="input-field col s12 l4">
-                        <input type="text" name="referralBy" class="capitalized" value="<%= referral.referralBy %>" id="referralBy">
+                        <input type="text" disabled name="referralBy" class="capitalized" value="<%= referral.referralBy.name %> <%= referral.referralBy.last_name %>" id="referralBy">
                         <label class="active" for="referralBy">Referral By</label>
                     </div>
                     <div class="input-field col s12 l4">

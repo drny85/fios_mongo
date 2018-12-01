@@ -33,7 +33,7 @@ exports.getReferral = (req, res, next) => {
    let title = "Details";
    let path = 'details';
     res.render('referrals/referral-detail', { referral: referral, title: title, path: path});
-  });
+  }).catch(err => console.log(err));
 };
 
 //add a referral page
@@ -53,6 +53,7 @@ exports.getAddReferral = (req, res, next) => {
 exports.editReferral = (req, res, next) => {
     const id = req.params.id;
     Referral.findOne({_id: id})
+    .populate('referralBy', 'name last_name')
     .then(referral => {
       res.render('referrals/referral-edit', { referral: referral, title: "Editing", path: 'editing'});
     })
@@ -188,8 +189,8 @@ exports.postReferral = (req, res, next) => {
   .then(result => {
     return Referee.findById(referralBy)
   }).then(ref => {
-    
-    ref.referrals.push(referral);
+
+    ref.referrals.push(referral._id);
     ref.save();
     res.redirect('/referrals')
   })
