@@ -19,7 +19,6 @@ exports.getReferrals = (req, res, next) => {
   .sort('moveIn')
   .exec()
   .then(referrals => {
-    console.log(referrals);
     res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
   })
   .catch(err => console.log(err));
@@ -28,7 +27,9 @@ exports.getReferrals = (req, res, next) => {
 
 exports.getReferral = (req, res, next) => {
   const id = req.params.id;
-  Referral.findById(id).then(referral => {
+  Referral.findById(id)
+  .populate('referralBy', 'name last_name -_id')
+  .then(referral => {
    let title = "Details";
    let path = 'details';
     res.render('referrals/referral-detail', { referral: referral, title: title, path: path});
@@ -81,7 +82,7 @@ exports.updateReferral = (req, res, next) => {
   const package = req.body.package;
 
 
-  Referral.findByIdAndUpdate(id, {
+  Referral.findOneAndUpdate({_id: id}, {
     name: name,
     last_name: last_name,
     address: address,
@@ -98,31 +99,37 @@ exports.updateReferral = (req, res, next) => {
   }).then(referral => {
    
     res.redirect('/detail/'+referral._id);
-    if ( status.toLowerCase() === 'closed') {
-      return transporter.sendMail({
-        to: 'drny85@me.com',
-        from: 'drny85@gmail.com',
-        subject: 'Testing',
-        html: ` <!DOCTYPE html>
-        <html>
-          <head>
-            <!--Import Google Icon Font-->
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <!--Import materialize.css-->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    // if ( status.toLowerCase() === 'closed') {
+    //   return transporter.sendMail({
+    //     to: 'drny85@me.com',
+    //     from: 'drny85@gmail.com',
+    //     subject: 'Testing',
+    //     html: ` <!DOCTYPE html>
+    //     <html>
+    //       <head>
+    //         <!--Import Google Icon Font-->
+    //         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    //         <!--Import materialize.css-->
+    //         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
       
-            <!--Let browser know website is optimized for mobile-->
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          </head>
+    //         <!--Let browser know website is optimized for mobile-->
+    //         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    //       </head>
       
-          <body>
+    //       <body>
           
-           <div class="z-depth-5"> Hello </div>
-          </body>
-        </html>
-              `
-      })
-    }
+    //        <div class="z-depth-2">
+    //         <h5 class="center"> This referral has been closed </h5.
+    //         <br>
+    //         Name: <p>${name} ${last_name}</p>
+    //         MON: <p>${mon} </p>
+    //         Phone: <p>${phone} </p>
+    //        </div>
+    //       </body>
+    //     </html>
+    //           `
+    //   })
+    // }
   })
   .catch(err => console.log(err));
 
@@ -179,8 +186,10 @@ exports.postReferral = (req, res, next) => {
   });
   referral.save()
   .then(result => {
-    console.log("Saved");
-    res.redirect('/referrals');
+    return Referee.findById(referralBy)
+  }).then(ref => {
+    console.log(ref);
+    res.redirect('/referrals')
   })
   .catch(err => console.log(err));
   

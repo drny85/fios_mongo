@@ -72,10 +72,10 @@
                    <span id="mailto"><a href="mailto:<%= referral.email %>"> <%= referral.email %> </a></span> 
                 </li>
                 <li class="collection-item">Move In:
-                    <%= referral.moveIn %>
+                    <%= referral.moveIn %> 
                 </li>
                 <li class="collection-item capitalized">Referred By:
-                    <%= referral.referralBy %>
+                    <%= referral.referralBy.name %> <%= referral.referralBy.last_name %>
                 </li>
                 <li class="collection-item">Status:
                     <span class="upper"><%= referral.status %></span>
