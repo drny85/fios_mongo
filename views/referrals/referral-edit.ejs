@@ -73,10 +73,10 @@
                         <label class="active" for="status">Status</label>
                     </div>
                     <!-- if order is closed show this otherwise hide -->
-                    <div class="<%= referral.status === 'Closed' ? '' : 'hidden' %> animated fadeInDown" id="order_closed"> 
+                    <div class="<%= referral.status === 'closed' ? '' : 'hidden' %> animated fadeInDown" id="order_closed"> 
                         <div class="row" >
                             <div class="input-field col s6 l6">
-                                <input type="text" class="upper <%= referral.status === 'Closed' ? 'validate' : '' %>" name="mon" maxlength="13" id="mon" value="<%= referral.mon %>">
+                                <input type="text" class="upper <%= referral.status === 'closed' ? 'validate' : '' %>" name="mon" maxlength="13" id="mon" value="<%= referral.mon %>">
                                 <label for="mon" class="active">MON</label>
                             </div>
                             <div class="input-field col s6 l6">

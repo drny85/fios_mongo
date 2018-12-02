@@ -3,6 +3,9 @@
 
 
 <div class="container">
+    <div>
+            <a class="btn waves-effect black waves-light mt-8" href="/add-referral">Add Referral</a>
+    </div>
         <div class="nav-content white center-align">
                 <ul class="tabs tabs-grey black-text ">
                   <li class="tab"><a class="<%= status === 'all' ? 'active' : '' %>" href="/my-referrals/all">ALL</a></li>
@@ -10,12 +13,45 @@
                   <li class="tab"><a class="<%= status === 'closed' ? 'active' : '' %>" href="/my-referrals/closed">Closed</a></li>
                   <li class="tab"><a class="<%= status === 'pending' ? 'active' : '' %>" href="/my-referrals/pending">Pending</a></li>
                   <li class="tab"><a class="<%= status === 'in progress' ? 'active' : '' %>" href="/my-referrals/in progress">In Progress</a></li>
-                  <li class="tab"><a class="<%= status === 'no sold' ? 'active' : '' %>" href="/my-referrals/no sold">Not Sold</a></li>
+                  <li class="tab"><a class="<%= status === 'no sold' ? 'active' : '' %>" href="/my-referrals/not sold">Not Sold</a></li>
                 </ul>
               </div>
               <br>
 
-    <% if (referrals) { %>
+    <% if (referrals.length > 0) { %>
+    <div class="card">
+        <table>
+            <thead class="grey">
+                <tr>
+                    <th>Full Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Move In</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+               <% referrals.forEach(referral => { %>
+                <tr>
+                    <td class="capitalized"><%= referral.name %> <%= referral.last_name %></td>
+                    <td class="capitalized"><%= referral.address.address %>, <%= referral.address.city %></td>
+                    <td><%= referral.phone %></td>
+                    <td><a class="lowercase blue-text" href="mailto:<%= referral.email %>"><%= referral.email %></a></td>
+                    <td><%= referral.moveIn %></td>
+                    <td><%= referral.status %></td>
+                    <td><a class="btn black" href="/detail/<%= referral._id %>">Details</a></td>
+
+                </tr>
+
+               <% }) %>
+
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+
+    </div>
 
 
     <% } else { %>

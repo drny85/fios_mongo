@@ -104,8 +104,9 @@ exports.updateReferral = (req, res, next) => {
     res.redirect('/detail/'+referral._id);
     if ( status.toLowerCase() === 'closed') {
       return transporter.sendMail({
-        to: 'drny85@icloud.com',
+        to: `drny85@icloud.com`,
         from: 'robertm3lendez@gmail.com',
+        cc: 'robert.melendez@drascosales.com',
         subject: `Referral Closed Notification!`,
         html: `
         <!DOCTYPE html>
@@ -295,20 +296,34 @@ Referral.find({referralBy: id})
 exports.getReferralsStatus = (req, res) => {
    let status = req.params.status;
    let statusRequested = status;
+
+   if (statusRequested === 'not%20sold') {
+     statusRequested = 'not sold';
+   } else if (statusRequested === 'in%20progress') {
+    statusRequested = 'in progress';
+   }
+
+   
    console.log(statusRequested);
    const title = 'My Referrals';
    const path = 'my referrals';
    if ( statusRequested !== 'all') {
      Referral.find({status: statusRequested})
+     .sort('-moveIn')
+     .exec()
      .then(referrals => {
-       console.log('Referrals:', referrals);
+
+      referrals = [...referrals];
+       
        res.render('referrals/my-referrals', { referrals: referrals, title: title, path : path, status: statusRequested});
      })
      .catch(err => console.log(err));
    } else {
     Referral.find()
+    .sort('-moveIn')
+    .exec()
     .then(referrals => {
-      console.log('ALL:', referrals)
+      referrals = [...referrals];
       res.render('referrals/my-referrals', { referrals: referrals, title: title, path : path, status: statusRequested});
     })
     .catch(err => console.log(err));
