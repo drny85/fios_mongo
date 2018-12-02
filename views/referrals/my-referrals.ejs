@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+
+<div class="container">
+        <div class="nav-content white center-align">
+                <ul class="tabs tabs-grey black-text ">
+                  <li class="tab"><a class="<%= status === 'all' ? 'active' : '' %>" href="/my-referrals/all">ALL</a></li>
+                  <li class="tab"><a class="<%= status === 'new' ? 'active' : '' %>" href="/my-referrals/new">New</a></li>
+                  <li class="tab"><a class="<%= status === 'closed' ? 'active' : '' %>" href="/my-referrals/closed">Closed</a></li>
+                  <li class="tab"><a class="<%= status === 'pending' ? 'active' : '' %>" href="/my-referrals/pending">Pending</a></li>
+                  <li class="tab"><a class="<%= status === 'in progress' ? 'active' : '' %>" href="/my-referrals/in progress">In Progress</a></li>
+                  <li class="tab"><a class="<%= status === 'no sold' ? 'active' : '' %>" href="/my-referrals/no sold">Not Sold</a></li>
+                </ul>
+              </div>
+              <br>
+
+    <% if (referrals) { %>
+
+
+    <% } else { %>
+
+    <div class="z-depth">
+        <h3 class="center">No Referrals Available</h3>
+    </div>
+     <% } %>
+</div>
+
+
+
+<%- include('../partials/footer.ejs') %>

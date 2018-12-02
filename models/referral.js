@@ -5,13 +5,13 @@ const Referee= require('./referee');
 const Schema = mongoose.Schema;
 
 const referralSchema = new Schema({
-    name: { type: String, required: true},
-    last_name: { type: String, required: true},
+    name: { type: String, required: true, lowercase: true},
+    last_name: { type: String, required: true, lowercase: true},
     address: Object,
     phone: {type: String, required: true},
-    email: String,
+    email: {type: String, lowercase: true},
     comment: String,
-    status: String,
+    status: {type: String, lowercase: true},
     moveIn: String,
     due_date: String,
     order_date: String,

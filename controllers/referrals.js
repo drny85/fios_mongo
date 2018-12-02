@@ -292,6 +292,30 @@ Referral.find({referralBy: id})
 }
      
 
+exports.getReferralsStatus = (req, res) => {
+   let status = req.params.status;
+   let statusRequested = status;
+   console.log(statusRequested);
+   const title = 'My Referrals';
+   const path = 'my referrals';
+   if ( statusRequested !== 'all') {
+     Referral.find({status: statusRequested})
+     .then(referrals => {
+       console.log('Referrals:', referrals);
+       res.render('referrals/my-referrals', { referrals: referrals, title: title, path : path, status: statusRequested});
+     })
+     .catch(err => console.log(err));
+   } else {
+    Referral.find()
+    .then(referrals => {
+      console.log('ALL:', referrals)
+      res.render('referrals/my-referrals', { referrals: referrals, title: title, path : path, status: statusRequested});
+    })
+    .catch(err => console.log(err));
+ 
+   }
+}
+
   
 
 

@@ -7,9 +7,9 @@ const Schema = mongoose.Schema;
 
 const referralBySchema = new Schema({
     name: {type: String, required: true},
-    last_name: String,
+    last_name: {type: String, lowercase: true},
     phone: String,
-    email: String,
+    email: {type: String, lowercase: true},
     referrals: {type: [Schema.Types.ObjectId], ref: 'Referral'}
 })
 

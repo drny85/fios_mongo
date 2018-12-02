@@ -175,3 +175,15 @@ li .active {
 .hidden {
   display: none;
 }
+
+.tabs .tab a {
+  color: black;
+}
+
+.tabs .tab:hover {
+
+  background-color: rgb(169, 180, 180);
+}
+.tabs .tab a.active {
+  color: aliceblue;
+}
