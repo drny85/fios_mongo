@@ -44,11 +44,13 @@ app.use(bodyParser.json());
 const homeRoutes = require('./routes/home');
 const reportRoutes = require('./routes/reports');
 const referralRoutes = require('./routes/referrals');
+const refereeRoutes = require('./routes/referee');
 
 
 app.use(homeRoutes);
 app.use(reportRoutes);
 app.use(referralRoutes);
+app.use('/referee', refereeRoutes);
 
 mongoose
   .connect(MONGO_URL, {useNewUrlParser: true})

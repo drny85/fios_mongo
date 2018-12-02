@@ -15,4 +15,6 @@ router.post('/add-referee', refereeController.postReferee);
 //get all referees route
 router.get('/all-referees', refereeController.getReferees);
 
+router.get('/details/:id', refereeController.getOneReferee);
+
 module.exports = router;

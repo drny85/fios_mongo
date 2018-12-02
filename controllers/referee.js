@@ -17,7 +17,7 @@ exports.getAddReferee = (req, res, next) => {
     let title = 'Add Referre';
     let path = 'add-referee';
   
-    res.render('referrals/add-referee', {title: title, path: path , message: req.flash('error')});
+    res.render('referee/add-referee', {title: title, path: path , message: req.flash('error')});
   }
 
 
@@ -30,7 +30,7 @@ exports.getAddReferee = (req, res, next) => {
     Referee.find()
     .then(referees => {
   
-      res.render('referrals/all-referees', {referees: referees, title: title, path: path});
+      res.render('referee/all-referees', {referees: referees, title: title, path: path});
     })
     .catch(err => console.log(err));
   }
@@ -69,5 +69,16 @@ exports.getAddReferee = (req, res, next) => {
   
   }
        
+exports.getOneReferee = (req, res) => {
+
+  const id = req.params.id;
+  const title = 'Referee Details';
+  const path = 'referee-details';
+
+  Referee.findOne({_id: id})
+  .then(referee => {
+    res.render('referee/details', {referee: referee, title: title, path: path});
+  })
+}
   
   
