@@ -69,13 +69,13 @@
                 <li class="collection-item"><i class="material-icons tiny">
                         email
                         </i> Email:
-                   <span id="mailto"><a href="mailto:<%= referral.email %>"> <%= referral.email %> </a></span> 
+                   <span><a class="blue-text" href="mailto:<%= referral.email %>"> <%= referral.email %> </a></span> 
                 </li>
                 <li class="collection-item">Move In:
-                    <%= referral.moveIn %> 
+                    <%= referral.moveIn %>
                 </li>
                 <li class="collection-item capitalized">Referred By:
-                    <%= referral.referralBy.name %> <%= referral.referralBy.last_name %>
+                  <a  class="black-text" href="/referee/details/<%= referral.referralBy._id %>"><%= referral.referralBy.name %> <%= referral.referralBy.last_name %></a>  
                 </li>
                 <li class="collection-item">Status:
                     <span class="upper"><%= referral.status %></span>

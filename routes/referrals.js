@@ -33,5 +33,8 @@ router.post('/add-referee', referralController.postReferee);
 //get all referees route
 router.get('/all-referees', referralController.getReferees);
 
+//get all referral by referee.
+router.get('/referral/referee/:id', referralController.getAllReferralsById);
+
 module.exports = router;
 

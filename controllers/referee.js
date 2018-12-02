@@ -82,7 +82,6 @@ exports.getOneReferee = (req, res, next) => {
   })
   .catch(err => console.log(err));
 }
-  
 
 //get edit referee page
 
@@ -114,4 +113,6 @@ exports.postUpdateReferee = ( req, res) => {
   
 
 }
+
+
   

@@ -15,10 +15,11 @@ exports.getReferrals = (req, res, next) => {
   let title = 'Referrals';
   let path = 'referrals';
   Referral.find()
-  .populate('referralBy')
+  .populate('referralBy', 'name last_name')
   .sort('moveIn')
   .exec()
   .then(referrals => {
+    console.log(referrals);
     res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
   })
   .catch(err => console.log(err));
@@ -28,7 +29,7 @@ exports.getReferrals = (req, res, next) => {
 exports.getReferral = (req, res, next) => {
   const id = req.params.id;
   Referral.findById(id)
-  .populate('referralBy', 'name last_name -_id')
+  .populate('referralBy', 'name last_name _id')
   .then(referral => {
    let title = "Details";
    let path = 'details';
@@ -53,7 +54,7 @@ exports.getAddReferral = (req, res, next) => {
 exports.editReferral = (req, res, next) => {
     const id = req.params.id;
     Referral.findOne({_id: id})
-    .populate('referralBy', 'name last_name')
+    .populate('referralBy', '_id name last_name')
     .then(referral => {
       res.render('referrals/referral-edit', { referral: referral, title: "Editing", path: 'editing'});
     })
@@ -245,6 +246,21 @@ exports.postReferee = (req, res, next) => {
   }).catch(err => console.log(err));
   
 
+}
+
+exports.getAllReferralsById = (req, res) => {
+  const id = req.params.id;
+Referral.find({referralBy: id})
+  .populate('referralBy', 'name last_name')
+  .sort('moveIn')
+  .exec()
+  .then(referrals => {
+    console.log('Result;', referrals);
+    const title = 'My Referrals';
+    const path = 'personal referrals'
+    res.render('referrals/personal-referral', {referrals: referrals, title: title, path: path});
+  })
+  .catch(err => console.log(err));
 }
      
 

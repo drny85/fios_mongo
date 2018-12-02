@@ -14,7 +14,7 @@
                     </li>
                     <li class="collection-item capitalized"><b>Last Name: </b><%= referee.last_name %></li>
                     <li class="collection-item capitalized"><b>Phone: </b><%= referee.phone %></li>
-                    <li class="collection-item caoitalized"><b>Email: </b><%= referee.email %></li>
+                    <li class="collection-item caoitalized"><b>Email: </b><a class="blue-text" href="mailto:<%= referee.email %>"><%= referee.email %></a></li>
                  
                 </ul>
                 <br>
@@ -28,7 +28,7 @@
                               <div class="card">
                                 <div class="card-image">
 
-                                  <img src="/images/rebecca.png">
+                                  <img class="responsive-img" src="/images/rebecca.png">
                                   <span class="card-title capitalized"><%= referee.name %> <%= referee.last_name %></span>
                                 </div>
                                 <div class="card-content">
@@ -36,7 +36,7 @@
                                   I am convenient because I require little markup to use effectively.</p>
                                 </div>
                                 <div class="card-action">
-                                  <button class="btn black">View Referrals</button>
+                                  <a href="/referral/referee/<%= referee._id %>" class="btn black">View Referrals</a>
                                 </div>
                               </div>
                             </div>
