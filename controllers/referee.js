@@ -3,6 +3,7 @@ const Referral = require('../models/referral');
 const Referee = require('../models/referee');
 const nodemailer = require('nodemailer');
 const transport = require('nodemailer-sendgrid-transport');
+const _ = require('lodash');
 
 const transporter = nodemailer.createTransport(transport({
   auth : {
@@ -69,7 +70,7 @@ exports.getAddReferee = (req, res, next) => {
   
   }
        
-exports.getOneReferee = (req, res) => {
+exports.getOneReferee = (req, res, next) => {
 
   const id = req.params.id;
   const title = 'Referee Details';
@@ -79,6 +80,38 @@ exports.getOneReferee = (req, res) => {
   .then(referee => {
     res.render('referee/details', {referee: referee, title: title, path: path});
   })
+  .catch(err => console.log(err));
 }
   
+
+//get edit referee page
+
+exports.getEditReferee = (req, res, next) => {
+
+  const title = 'Edit Referee';
+  const path = 'edit referee';
+  const id = req.params.id;
+  Referee.findOne({_id: id})
+  .then(referee => {
+    res.render('referee/edit', {referee: referee, title: title, path: path});
+  })
+  .catch(err => console.log(err))
+}
+
+//post update referre page
+
+exports.postUpdateReferee = ( req, res) => {
+  const id = req.params.id;
+  const title = "Update Referee";
+  const path = 'update referee';
+  const body = _.pick(req.body, ['name', 'last_name', 'email', 'phone']);
+
+  Referee.findByIdAndUpdate(id, body)
+  .then(referee => {
+    res.redirect('/referee/details/'+ id);
+  })
+  .catch();
+  
+
+}
   

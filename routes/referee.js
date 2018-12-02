@@ -17,4 +17,10 @@ router.get('/all-referees', refereeController.getReferees);
 
 router.get('/details/:id', refereeController.getOneReferee);
 
+//get edit referee page
+router.get('/edit/:id', refereeController.getEditReferee);
+
+// post update referee
+router.post('/update/:id', refereeController.postUpdateReferee);
+
 module.exports = router;
