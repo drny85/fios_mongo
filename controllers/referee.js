@@ -78,6 +78,7 @@ exports.getOneReferee = (req, res, next) => {
 
   Referee.findOne({_id: id})
   .then(referee => {
+    
     res.render('referee/details', {referee: referee, title: title, path: path});
   })
   .catch(err => console.log(err));

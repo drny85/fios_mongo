@@ -24,15 +24,6 @@ router.post('/referral/update/:id', referralController.updateReferral);
 //delete referral route
 router.post('/referral/delete/:id', referralController.deleteReferral);
 
-//get referralby page route
-router.get('/add-referee', referralController.getAddReferee);
-
-//add referralBy or referee 
-router.post('/add-referee', referralController.postReferee);
-
-//get all referees route
-router.get('/all-referees', referralController.getReferees);
-
 //get all referral by referee.
 router.get('/referral/referee/:id', referralController.getAllReferralsById);
 

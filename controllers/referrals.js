@@ -54,7 +54,6 @@ exports.getAddReferral = (req, res, next) => {
 exports.editReferral = (req, res, next) => {
     const id = req.params.id;
     Referral.findOne({_id: id})
-    .populate('referralBy', '_id name last_name')
     .then(referral => {
       res.render('referrals/referral-edit', { referral: referral, title: "Editing", path: 'editing'});
     })
@@ -82,7 +81,7 @@ exports.updateReferral = (req, res, next) => {
   const due_date = req.body.due_date;
   const order_date = req.body.order_date;
   const package = req.body.package;
-
+  let referralBy;
 
   Referral.findOneAndUpdate({_id: id}, {
     name: name,
@@ -98,40 +97,68 @@ exports.updateReferral = (req, res, next) => {
     package: package,
     mon: mon,
     moveIn: moveIn
-  }).then(referral => {
-   
+  })
+  .populate('referralBy', 'name last_name')
+  .then(referral => {
+    referralBy = `${referral.referralBy.name} ${referral.referralBy.last_name}`;
     res.redirect('/detail/'+referral._id);
-    // if ( status.toLowerCase() === 'closed') {
-    //   return transporter.sendMail({
-    //     to: 'drny85@me.com',
-    //     from: 'drny85@gmail.com',
-    //     subject: 'Testing',
-    //     html: ` <!DOCTYPE html>
-    //     <html>
-    //       <head>
-    //         <!--Import Google Icon Font-->
-    //         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    //         <!--Import materialize.css-->
-    //         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-      
-    //         <!--Let browser know website is optimized for mobile-->
-    //         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    //       </head>
-      
-    //       <body>
+    if ( status.toLowerCase() === 'closed') {
+      return transporter.sendMail({
+        to: 'drny85@icloud.com',
+        from: 'robertm3lendez@gmail.com',
+        subject: `Referral Closed Notification!`,
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+             <!--Import Google Icon Font-->
+              <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                <!--Import materialize.css-->
+               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
           
-    //        <div class="z-depth-2">
-    //         <h5 class="center"> This referral has been closed </h5.
-    //         <br>
-    //         Name: <p>${name} ${last_name}</p>
-    //         MON: <p>${mon} </p>
-    //         Phone: <p>${phone} </p>
-    //        </div>
-    //       </body>
-    //     </html>
-    //           `
-    //   })
-    // }
+                 <!--Let browser know website is optimized for mobile-->
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <title></title>
+        </head>
+        <body>
+        
+            <div class="z-depth-4 row">
+                <div class="card col s12">
+                    <h4 class="center">Bellow Referral has been closed!</h4>
+                    <div>
+                            <ul class="collection with-header">
+                                    <li style="text-transform:capitalize;" class="collection-header"><h4>${name} ${last_name}</h4></li>
+                                    <li style="text-transform:uppercase;" class="collection-item">MON: <b>${mon}</b></li>
+                                    <li  class="collection-item">Due Date: ${due_date}</li>
+                                    <li class="collection-item">Order Placed On: ${order_date}</li>
+                                    <li class="collection-item">Package: ${package}</li>
+                                    <li style="text-transform:capitalize;" class="collection-item">Address: ${address.address}</li>
+                                    <li style="text-transform:capitalize;" class="collection-item">City: ${address.city}</li>
+                                    <li class="collection-item">Phone: ${phone}</li>
+                                    <li class="collection-item">Email: ${email}</li>
+                                    <li class="collection-item">Move In: ${moveIn}</li>
+                                    <li style="text-transform:capitalize;" class="collection-item">Referral By: ${referralBy}</li>
+        
+                                  </ul>
+                                <div style="margin-bottom:100px; class="z-depth-3">
+                                    <h5 class="grey center">Notes or Comments</h5>
+                                    <p style="padding: 10px" class="center-align">${comment}</p>
+                                </div>
+        
+                    </div>
+                </div>
+                
+            </div>
+            
+        </body>
+        </html>
+        `
+       
+      })
+    }
   })
   .catch(err => console.log(err));
 
@@ -151,6 +178,7 @@ exports.getAddReferee = (req, res, next) => {
 exports.deleteReferral = (req, res, next) => {
   const id = req.params.id;
   Referral.findByIdAndDelete(id)
+  .populate('referralBy', 'name last_name')
   .then(() => {
     res.redirect('/referrals');
   })

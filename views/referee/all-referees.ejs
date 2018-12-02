@@ -28,7 +28,7 @@
                     <td><%= referee.name %> <%= referee.last_name %></td>
                     <td><%= referee.phone %></td>
                     <td class="lowercase"><a href="mailto:<%= referee.email %>"><%= referee.email %></a></td>
-                    <td><a class="btn grey" href="/details/<%= referee._id %>">Details</a></td>
+                    <td><a class="btn grey" href="/referee/details/<%= referee._id %>">Details</a></td>
                 </tr> 
                    
                 <% }) %>
@@ -42,6 +42,7 @@
             <h2 class="center">No Data</h2>
         </div>
      <% } %>
+     <div style="margin-bottom: 100px;" class=""></div>
 </div>
 
 <%- include('../partials/footer.ejs') %>
