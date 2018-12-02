@@ -19,7 +19,7 @@ exports.getReferrals = (req, res, next) => {
   .sort('moveIn')
   .exec()
   .then(referrals => {
-    console.log(referrals);
+    referrals = [...referrals];
     res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
   })
   .catch(err => console.log(err));
@@ -303,8 +303,6 @@ exports.getReferralsStatus = (req, res) => {
     statusRequested = 'in progress';
    }
 
-   
-   console.log(statusRequested);
    const title = 'My Referrals';
    const path = 'my referrals';
    if ( statusRequested !== 'all') {

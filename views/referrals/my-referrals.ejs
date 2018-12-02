@@ -40,7 +40,13 @@
                     <td><%= referral.phone %></td>
                     <td><a class="lowercase blue-text" href="mailto:<%= referral.email %>"><%= referral.email %></a></td>
                     <td><%= referral.moveIn %></td>
-                    <td><%= referral.status %></td>
+                    <td
+                    class="center  <%= referral.status === 'new' ? 'blue lighten-1': '' %>
+                    <%= referral.status === 'pending' ? 'amber lighten-3': '' %>
+                    <%= referral.status === 'closed' ? 'green': '' %>
+                    <%= referral.status === 'not sold' ? 'red': '' %>
+                    <%= referral.status === 'in progress' ? 'grey': '' %>"
+                    ><%= referral.status %></td>
                     <td><a class="btn black" href="/detail/<%= referral._id %>">Details</a></td>
 
                 </tr>
