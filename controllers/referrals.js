@@ -20,7 +20,8 @@ exports.getReferrals = (req, res, next) => {
   .exec()
   .then(referrals => {
     referrals = [...referrals];
-    res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
+    res.status(200).json({referrals: referrals});
+    // res.render('referrals/referrals', { title: title, referrals: referrals, path: path});
   })
   .catch(err => console.log(err));
   
@@ -33,7 +34,8 @@ exports.getReferral = (req, res, next) => {
   .then(referral => {
    let title = "Details";
    let path = 'details';
-    res.render('referrals/referral-detail', { referral: referral, title: title, path: path});
+   return res.status(200).json({referral: referral});
+    // res.render('referrals/referral-detail', { referral: referral, title: title, path: path});
   }).catch(err => console.log(err));
 };
 
@@ -55,6 +57,7 @@ exports.editReferral = (req, res, next) => {
     const id = req.params.id;
     Referral.findOne({_id: id})
     .then(referral => {
+      return res.json({referral: referral});
       res.render('referrals/referral-edit', { referral: referral, title: "Editing", path: 'editing'});
     })
     .catch(err => console.log(err));

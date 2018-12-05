@@ -30,5 +30,6 @@ router.get('/referral/referee/:id', referralController.getAllReferralsById);
 
 //get all referrals by status page 
 router.get('/my-referrals/:status', referralController.getReferralsStatus);
-module.exports = router;
 
+
+module.exports = router;

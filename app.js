@@ -15,28 +15,30 @@ const app = express();
 app.use(helmet());
 //storing sessions
 const store = new MongoDBStore({
-    uri: MONGO_URL,
-    collection: 'sessions'
-  });
+  uri: MONGO_URL,
+  collection: 'sessions'
+});
 // setting sessions
-  app.use(
-    session({
-      secret: 'my secret',
-      resave: false,
-      saveUninitialized: false,
-      store: store
-    })
-  );
+app.use(
+  session({
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false,
+    store: store
+  })
+);
 
-  //flash messages
+//flash messages
 app.use(flash());
-  
+
 // set views engine 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 //midlewares
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 
 
@@ -45,15 +47,19 @@ const homeRoutes = require('./routes/home');
 const reportRoutes = require('./routes/reports');
 const referralRoutes = require('./routes/referrals');
 const refereeRoutes = require('./routes/referee');
+const usersRoutes = require('./routes/users');
 
 
 app.use(homeRoutes);
 app.use(reportRoutes);
 app.use(referralRoutes);
 app.use('/referee', refereeRoutes);
+app.use('/user', usersRoutes)
 
 mongoose
-  .connect(MONGO_URL, {useNewUrlParser: true})
+  .connect(MONGO_URL, {
+    useNewUrlParser: true
+  })
   .then(result => {
     let PORT = process.env.PORT || 3000;
     app.listen(PORT);
@@ -62,4 +68,3 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-
