@@ -24,7 +24,8 @@ exports.createUser = (req, res, next) => {
                     newUser.password = hashed;
                     return newUser.save()
                         .then(user => {
-                            res.json({
+                            const token = user.generateAuthToken();
+                            res.header('x-auth-token', token).json({
                                 message: 'New user created',
                                 user: _.pick(user, ['name', 'email', '_id'])
                             });
@@ -64,4 +65,16 @@ exports.loginUser = (req, res, next) => {
             })
         })
 
+}
+
+exports.getUser = (req, res, next) => {
+    const userId = req.user._id;
+    User.findById(userId)
+        .select('-password')
+        .then(user => {
+
+            res.json({
+                user: user
+            });
+        })
 }

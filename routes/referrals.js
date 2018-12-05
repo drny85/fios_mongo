@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+const auth = require('../middlewares/auth');
 const express = require('express');
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 const referralController = require('../controllers/referrals');
 
 //getting all referrals
-router.get('/referrals', referralController.getReferrals);
+router.get('/referrals', auth, referralController.getReferrals);
 
 //adding a new referral 
 router.get('/add-referral', referralController.getAddReferral);

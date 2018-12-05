@@ -58,7 +58,7 @@ exports.postReferee = (req, res, next) => {
     .then(result => {
       if (result) {
         req.flash('error', 'Referee aldeay in Database');
-        res.redirect('/add-referee');
+        res.redirect('/referee/add-referee');
         throw new Error('Referee already in file');
 
       } else {
@@ -71,7 +71,7 @@ exports.postReferee = (req, res, next) => {
         })
         referee.save()
           .then((ref) => {
-            res.redirect('/all-referees');
+            res.redirect('/referee/all-referees');
           })
       }
     }).catch(err => console.log(err));

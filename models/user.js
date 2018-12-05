@@ -1,4 +1,5 @@
 //jshint esversion:6
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 
@@ -58,5 +59,16 @@ const userSchema = new Schema({
 
 
 });
+
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({
+        _id: this._id,
+        roles: this.roles
+    }, process.env.MY_JWT_PRIVATE_KEY);
+
+    return token;
+}
+
+
 
 module.exports = mongoose.model('User', userSchema);
